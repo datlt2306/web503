@@ -1,0 +1,84 @@
+openapi: 3.0.3
+info:
+    title: Document API dự án Ecommerce
+    description: |-
+        Dự án tốt nghiệp - Ecommerces
+    version: 1.0.1
+servers:
+    - url: http://localhost:8080/api
+tags:
+    - name: user
+      description: Tất cả endpoint liên quan đến
+paths:
+    /signup:
+        post:
+            tags:
+                - user
+            summary: Đăng ký
+            description: Đăng ký tài khoản
+            operationId: signup
+            requestBody:
+                description: Đăng ký tài khoản
+                content:
+                    application/json:
+                        schema:
+                            type: "object"
+                            properties:
+                                name:
+                                    type: "string"
+                                    example: "Le Trong Dat"
+                                email:
+                                    type: "string"
+                                    example: "member@gmail.com"
+                                password:
+                                    type: "string"
+                                    example: "123456"
+                                confirmPassword:
+                                    type: "string"
+                                    example: "123456"
+                            # schema:
+                            #     $ref: "#/components/schemas/Pet"
+
+                required: true
+            responses:
+                "201":
+                    description: Tạo tài khoản thành công
+                    content:
+                        application/json:
+                            schema:
+                                type: "object"
+                                properties:
+                                    message:
+                                        type: "string"
+                                        example: "Tạo tài khoản thành công"
+                                    accessToken:
+                                        type: "string"
+                                        example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjAwNzk2YTViYzRjYmFhOTc5MjFkYSIsImlhdCI6MTcwMDc5MjIxNCwiZXhwIjoxNzAwODc4NjE0fQ.WxuWkB0GTkWiGcj3LuMSw_9vDOlPt7QUsu6lRRDX9D0"
+                                    user:
+                                        type: "object"
+                                        properties:
+                                            name:
+                                                type: "string"
+                                                example: "Le Trong Dat"
+                                            email:
+                                                type: "string"
+                                                example: "member@gmail.com"
+                                            role:
+                                                type: "string"
+                                                example: "member"
+                                            _id:
+                                                type: "string"
+                                                example: "65600796a5bc4cbaa97921da"
+                                            createdAt:
+                                                type: "string"
+                                                example: "2023-11-24T02:16:54.058Z"
+                                            "updatedAt":
+                                                type: "string"
+                                                example: "2023-11-24T02:16:54.058Z"
+                        # $ref: "#/components/schemas/Pet"
+                "400":
+                    description: Invalid ID supplied
+                "404":
+                    description: Pet not found
+                "405":
+                    description: Validation exception
