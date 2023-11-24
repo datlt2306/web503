@@ -1,24 +1,25 @@
 openapi: 3.0.3
 info:
-    title: Document API dự án Ecommerce
+    title: API Dự án tốt nghiệp
     description: |-
-        Dự án tốt nghiệp - Ecommerces
+        Đây là API dự án tốt nghiệp do Datlt34 master thực hiện
     version: 1.0.1
 servers:
     - url: http://localhost:8080/api
+    - url: http://swagger.io/v1
 tags:
-    - name: user
-      description: Tất cả endpoint liên quan đến
+    - name: auth
+      description: Liên quan đến đăng ký, đăng nhập
 paths:
     /signup:
         post:
             tags:
-                - user
+                - auth
             summary: Đăng ký
-            description: Đăng ký tài khoản
+            description: Tạo tài khoản người dùng
             operationId: signup
             requestBody:
-                description: Đăng ký tài khoản
+                description: Thông tin đăng ký tài khoản mới
                 content:
                     application/json:
                         schema:
@@ -36,13 +37,10 @@ paths:
                                 confirmPassword:
                                     type: "string"
                                     example: "123456"
-                            # schema:
-                            #     $ref: "#/components/schemas/Pet"
-
                 required: true
             responses:
                 "201":
-                    description: Tạo tài khoản thành công
+                    description: Đăng ký tài khoản thành công
                     content:
                         application/json:
                             schema:
@@ -72,12 +70,11 @@ paths:
                                             createdAt:
                                                 type: "string"
                                                 example: "2023-11-24T02:16:54.058Z"
-                                            "updatedAt":
+                                            updatedAt:
                                                 type: "string"
                                                 example: "2023-11-24T02:16:54.058Z"
-                        # $ref: "#/components/schemas/Pet"
                 "400":
-                    description: Invalid ID supplied
+                    description: Lỗi gì đó từ server
                 "404":
                     description: Pet not found
                 "405":
