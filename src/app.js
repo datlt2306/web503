@@ -1,8 +1,17 @@
 // export const viteNodeApp = app;
-
 import http from 'http';
-const server = http.createServer(() => {
-    console.log('ahihi')
+const server = http.createServer((req, res) => {
+    console.log(req)
+    if(req.url === '/'){
+        res.end('Home Page');
+    } else if(req.url === '/api/products'){
+        const data = [
+            { id: 1, name: "Product A"},
+            { id: 2, name: "Product B"},
+            { id: 3, name: "Product C"},
+        ]
+        res.end(JSON.stringify(data));
+    }
 });
 
 server.listen(8080, () => {
