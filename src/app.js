@@ -21,12 +21,12 @@ app.get(`/api/products`, (req, res) => {
         { id: 1, name: "Product A" },
         { id: 2, name: "Product B" },
         { id: 3, name: "Product C" },
+        { id: 4, name: "Product D" },
     ];
-    res.end(JSON.stringify(data));
+    res.json(data);
 });
-app.listen(3000, () => {
-    console.log(`Server is running on port 3000...`);
-});
+
+export const viteNodeApp = app;
 
 /**
  * B1: npm init -y
