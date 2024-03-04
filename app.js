@@ -1,29 +1,35 @@
-const http = require('http');
+// import http from "http";
+// const app = http.createServer((req, res) => {
+//     if (req.url === "/") {
+//         res.end(`<h1>Welcome to the home page</h1>`);
+//     } else if (req.url === "/api/products") {
+//         const data = [
+//             { id: 1, name: "Product A" },
+//             { id: 2, name: "Product B" },
+//             { id: 3, name: "Product C" },
+//         ];
+//         res.end(JSON.stringify(data));
+//     }
+//     console.log("Server is running...");
+// });
 
-const server = http.createServer((req, res) => {
-    const url = req.url;
-    if(url === '/product'){
-        res.setHeader('Content-Type','application/json');
-        const data = [{id: 1, name: "Product A"}, {id: 2, name: "Product B"}];
-        res.end(JSON.stringify(data));
-    } else if(url === "/posts"){
-        res.setHeader('Content-Type','application/json');
-        const data = [{id: 1, name: "Post A"}, {id: 2, name: "Post B"}];
-        res.end(JSON.stringify(data));
-    } else {
-        res.setHeader('Content-Type','text/html');
-        res.write("<html>");
-        res.write("<body>");
-            res.write("<h1>Home Page</h1>")
-        res.write("</body>");
-        res.write("</html>");
-        res.end();
-    }
+import express from "express";
+
+const app = express();
+app.get(`/api/products`, (req, res) => {
+    const data = [
+        { id: 1, name: "Product A" },
+        { id: 2, name: "Product B" },
+        { id: 3, name: "Product C" },
+    ];
+    res.end(JSON.stringify(data));
+});
+app.listen(3000, () => {
+    console.log(`Server is running on port 3000...`);
 });
 
-
-const PORT = 3001;
-
-server.listen(PORT, () => {
-    console.log(`Server running port ${PORT}`);
-})
+/**
+ * B1: npm init -y
+ * B2: npm i express --save
+ * B3: thêm type: "module" vào file package.json
+ */
