@@ -1,20 +1,17 @@
 // export const viteNodeApp = app;
-import http from 'http';
-const server = http.createServer((req, res) => {
-    console.log(req)
-    if(req.url === '/'){
-        res.end('Home Page');
-    } else if(req.url === '/api/products'){
-        const data = [
-            { id: 1, name: "Product A"},
-            { id: 2, name: "Product B"},
-            { id: 3, name: "Product C"},
-        ]
-        res.end(JSON.stringify(data));
-    }
-});
+// import http from 'http';
+import express from 'express';
 
-server.listen(8080, () => {
+const app = express();
+
+app.get('/api/products', (req, res) => {
+    const data = [
+        { id: 1, name: "Product A"},
+        { id: 2, name: "Product B"}
+    ];
+    res.json(data);
+});
+app.listen(8080, () => {
     console.log('conntect success!')
 });
 
@@ -23,3 +20,6 @@ server.listen(8080, () => {
 // B3: chỉnh sửa file package.json -> copy code của thầy
 // B4: chỉnh sửa file app.js -> export const viteNodeApp = app; ở cuối file
 // B5: npm run dev
+
+
+// Cài đặt express: npm i express --save
