@@ -1,35 +1,41 @@
-// import http from "http";
-// const app = http.createServer((req, res) => {
-//     if (req.url === "/") {
-//         res.end(`<h1>Welcome to the home page</h1>`);
-//     } else if (req.url === "/api/products") {
-//         const data = [
-//             { id: 1, name: "Product A" },
-//             { id: 2, name: "Product B" },
-//             { id: 3, name: "Product C" },
-//         ];
-//         res.end(JSON.stringify(data));
-//     }
-//     console.log("Server is running...");
-// });
-
-import express from "express";
+import express from 'express';
 
 const app = express();
-app.get(`/api/products`, (req, res) => {
-    const data = [
-        { id: 1, name: "Product A" },
-        { id: 2, name: "Product B" },
-        { id: 3, name: "Product C" },
-        { id: 4, name: "Product D" },
-    ];
-    res.json(data);
+// router
+// path -> endpoint
+// restful API
+app.get('/api/products', async(req, res) => {
+    try {
+        // fake connect database
+        const response = await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`);
+        const data = await response.json();
+        // tra ve client
+        res.json(data);
+    } catch (error) {
+        
+    }
+    
 });
+app.get('/api/products', (req, res) => {
+    res.json([
+        {id: 1, name: "Product A"}
+    ])
+});
+app.post('/api/products', (req, res) => {
+    res.json([
+        {id: 1, name: "Product A"}
+    ])
+});
+app.put('/api/products', (req, res) => {
+    res.json([
+        {id: 1, name: "Product A"}
+    ])
+});
+app.delete('/api/products', (req, res) => {
+    res.json([
+        {id: 1, name: "Product A"}
+    ])
+});
+app.listen(8080);
 
 export const viteNodeApp = app;
-
-/**
- * B1: npm init -y
- * B2: npm i express --save
- * B3: thêm type: "module" vào file package.json
- */
