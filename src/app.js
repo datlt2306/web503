@@ -12,26 +12,79 @@ const app = express();
 
 app.use(express.json())
 
-app.get(`/api/products`, (req, res) => {
-    res.json([{id: 1, name: "Product A"}])
+app.get(`/api/products`, async(req, res) => {
+    try {
+        const response = await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`);
+        const data = await response.json();
+        res.json(data);    
+    } catch (error) {
+        res.status(400).json({
+            message: "Lỗi cmnr"
+        })
+    }
+    
 })
-app.get(`/api/users`, (req, res) => {
-    res.json([{id: 1, name: "Product A"}])
-})
-app.get(`/api/categories`, (req, res) => {
-    res.json([{id: 1, name: "Product A"}])
-})
-app.get(`/api/products/:id`, (req, res) => {
-    console.log(req.params)
+app.get(`/api/products/:id`, async (req, res) => {
+    try {
+        const response = await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products/${req.params.id}`);
+        const data = await response.json();
+        // trả về client
+        res.json(data);    
+    } catch (error) {
+        res.status(400).json({
+            message: "Lỗi cmnr"
+        })
+    }
 });
-app.post(`/api/products`, (req, res) => {
-    console.log(req.body)
+app.post(`/api/products`, async(req, res) => {
+    try {
+        const response = await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(req.body),
+        });
+        const data = await response.json();
+        // trả về client
+        res.json(data);    
+    } catch (error) {
+        res.status(400).json({
+            message: error
+        })
+    }
 })
-app.delete(`/api/products/:id`, (req, res) => {
-    console.log(req.body)
+app.delete(`/api/products/:id`, async (req, res) => {
+    try {
+        const response = await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products/${req.params.id}`, {
+            method: "DELETE",
+        });
+        const data = await response.json();
+        // trả về client
+        res.json(data);    
+    } catch (error) {
+        res.status(400).json({
+            message: error
+        })
+    }
 })
-app.put(`/api/products/:id`, (req, res) => {
-    console.log(req.body)
+app.put(`/api/products/:id`, async (req, res) => {
+    try {
+        const response = await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products/${req.params.id}`, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(req.body),
+        });
+        const data = await response.json();
+        // trả về client
+        res.json(data);    
+    } catch (error) {
+        res.status(400).json({
+            message: error
+        })
+    }
 })
 // restful API
 
