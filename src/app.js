@@ -7,7 +7,7 @@ const app = express();
 app.get('/api/products', async(req, res) => {
     try {
         // fake connect database
-        const response = await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`);
+        const response = await fetch(`http://localhost:3000/products`);
         const data = await response.json();
         // tra ve client
         res.json(data);
