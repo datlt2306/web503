@@ -6,14 +6,34 @@
 
 // Cài đặt express: npm i express --save
 
-import http from "http";
 import express from 'express';
 
 const app = express();
 
+app.use(express.json())
+
 app.get(`/api/products`, (req, res) => {
     res.json([{id: 1, name: "Product A"}])
 })
+app.get(`/api/users`, (req, res) => {
+    res.json([{id: 1, name: "Product A"}])
+})
+app.get(`/api/categories`, (req, res) => {
+    res.json([{id: 1, name: "Product A"}])
+})
+app.get(`/api/products/:id`, (req, res) => {
+    console.log(req.params)
+});
+app.post(`/api/products`, (req, res) => {
+    console.log(req.body)
+})
+app.delete(`/api/products/:id`, (req, res) => {
+    console.log(req.body)
+})
+app.put(`/api/products/:id`, (req, res) => {
+    console.log(req.body)
+})
+// restful API
 
 app.listen(8080, () => {
     console.log('Started')
