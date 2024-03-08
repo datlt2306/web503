@@ -5,10 +5,4 @@ app.use(express.json());
 
 app.use('/api/', productRouter);
 
-// restful API
-
-app.listen(8080, () => {
-    console.log("Started");
-});
-
 export const viteNodeApp = app;
