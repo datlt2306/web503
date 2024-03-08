@@ -6,8 +6,11 @@
         <title>Document</title>
     </head>
     <body>
-        <form action="" class="form">
-            <input type="text" class="form__input" />
-        </form>
+        <script>
+
+            fetch(`http://localhost:8080/api/products`)
+                .then((response) => response.json())
+                .then((data) => console.log(data));
+        </script>
     </body>
 </html>
