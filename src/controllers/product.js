@@ -1,14 +1,13 @@
 export const getProducts = async (req, res) => {
     try {
-        const response = await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`);
-        const data = await response.json();
-        res.json(data);
+        const products = await Product.find();
+        res.json(products);
     } catch (error) {
         res.status(400).json({
             message: "Lỗi cmnr",
         });
     }
-}
+};
 
 export const getProductById = async (req, res) => {
     try {
@@ -23,7 +22,7 @@ export const getProductById = async (req, res) => {
             message: "Lỗi cmnr",
         });
     }
-}
+};
 export const addProduct = async (req, res) => {
     try {
         const response = await fetch(`https://6110f09bc38a0900171f0ed0.mockapi.io/products`, {
@@ -41,7 +40,7 @@ export const addProduct = async (req, res) => {
             message: error,
         });
     }
-}
+};
 
 export const deleteProduct = async (req, res) => {
     try {
@@ -59,7 +58,7 @@ export const deleteProduct = async (req, res) => {
             message: error,
         });
     }
-}
+};
 
 export const updateProduct = async (req, res) => {
     try {
@@ -81,4 +80,4 @@ export const updateProduct = async (req, res) => {
             message: error,
         });
     }
-} 
+};

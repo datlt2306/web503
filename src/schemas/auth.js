@@ -1,20 +1,26 @@
-import Joi from 'joi';
+import Joi from "joi";
 
-export const signupSchema = Joi.object({
-    name: Joi.string(),
-    email: Joi.string().required().email().messages({
-        "string.email": "Không đúng định dạng email",
-        "string.empty": "Không được để trống email",
-        "string.required": "Email là bắt buộc"
+export const registerSchema = Joi.object({
+    username: Joi.string().required().trim().messages({
+        "any.required": "Username bắt buộc phải nhập",
+        "string.empty": "Username không được để trống",
+        "string.trim": "Username không được chứa khoảng trắng",
     }),
-    password: Joi.string().required().min(6).messages({
-        "string.empty": "Không được để trống password",
-        "string.required": "Password là bắt buộc",
-        "string.min": "Ít nhất {#limit} ký tự"
+    email: Joi.string().email().required().messages({
+        "any.required": "Email bắt buộc phải nhập",
+        "string.email": "Email không đúng định dạng",
+        "string.empty": "Email không được để trống",
     }),
-    confirmPassword: Joi.string().valid(Joi.ref('password')).required().messages({
-        "any.only": "Mật không khớp",
-        "string.empty": "Confirm password không được để trống",
-        "string.required": "Bắt buộc phải nhật"
-    })
-})
+    password: Joi.string().min(6).required().messages({
+        "any.required": "Password bắt buộc phải nhập",
+        "string.empty": "Password không được để trống",
+        "string.min": "Password phải có ít nhất 6 ký tự",
+    }),
+    confirmPassword: Joi.string().required().valid(Joi.ref("password")).messages({
+        "any.only": "Password không khớp",
+        "any.required": "ConfirmPassword bắt buộc phải nhập",
+    }),
+    age: Joi.number().max(100).messages({
+        "number.max": "Tuổi không được lớn hơn 100",
+    }),
+});

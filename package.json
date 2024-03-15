@@ -22,5 +22,8 @@
     "mongoose-paginate-v2": "^1.7.1",
     "vite": "^4.1.4",
     "vite-plugin-node": "^3.0.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
   }
 }
