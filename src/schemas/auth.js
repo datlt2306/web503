@@ -24,3 +24,16 @@ export const registerSchema = Joi.object({
         "number.max": "Tuổi không được lớn hơn 100",
     }),
 });
+
+export const signinSchema = Joi.object({
+    email: Joi.string().email().required().messages({
+        "any.required": "Email bắt buộc phải nhập",
+        "string.email": "Email không đúng định dạng",
+        "string.empty": "Email không được để trống",
+    }),
+    password: Joi.string().min(6).required().messages({
+        "any.required": "Password bắt buộc phải nhập",
+        "string.empty": "Password không được để trống",
+        "string.min": "Password phải có ít nhất 6 ký tự",
+    }),
+});
