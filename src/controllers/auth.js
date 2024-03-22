@@ -26,7 +26,9 @@ export const signup = async (req, res) => {
     }
     // Tạo user mới từ thông tin client gửi lên
     const hashedPassword = await bcryptjs.hash(password, 10);
-    const user = await User.create({ ...req.body, password: hashedPassword });
+    const isFirstAccount = (await User.countDocuments()) === 0;
+    const role = isFirstAccount ? "admin" : "user";
+    const user = await User.create({ ...req.body, password: hashedPassword, role });
 
     // Trả về client dữ liệu là user đã tạo
     return res.status(201).json({
@@ -67,6 +69,7 @@ export const signin = async (req, res) => {
         // Tạo token và trả về cho client để client có thể gửi token này trong các request sau
 
         const token = jwt.sign({ id: user._id }, "123456", { expiresIn: "1h" });
+        res.cookie("token", token, { httpOnly: true });
         user.password = undefined;
         return res.status(200).json({
             message: "Đăng nhập thành công!",
@@ -78,4 +81,10 @@ export const signin = async (req, res) => {
             error: error.message,
         });
     }
+};
+export const signout = async (req, res) => {
+    res.clearCookie("token");
+    return res.status(200).json({
+        message: "Đăng xuất thành công!",
+    });
 };
